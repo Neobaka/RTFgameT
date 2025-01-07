@@ -10,13 +10,17 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public GameObject enemyPrefab;
+        public GameObject[] enemyPrefab;
         public int enemyCount;
         public float timeBetweenSpawns;
     }
 
     public Transform spawnPoint;        // Точка спавна врагов
-    public Transform[] waypoints;       // Массив точек пути
+    public Transform[] wayPoints1;
+    public Transform[] wayPoints2;
+    public Transform[] wayPoints3;
+    public Transform[] wayPoints4;
+    public Transform[][] allWayPoints;
     public Wave[] waves;               // Массив волн
     public float timeBetweenWaves = 15f; // Время между волнами
 
@@ -36,16 +40,21 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        this.allWayPoints = new Transform[][] { wayPoints1, wayPoints2, wayPoints3, wayPoints4 };
+
         if (spawnPoint == null)
         {
             Debug.LogError("Spawn point is not set in WaveManager!");
             return;
         }
 
-        if (waypoints == null || waypoints.Length == 0)
+        foreach (var wayPoints in allWayPoints)
         {
-            Debug.LogError("Waypoints are not set in WaveManager!");
-            return;
+            if (wayPoints == null || wayPoints.Length == 0)
+            {
+                Debug.LogError("Waypoints are not set in WaveManager!");
+                return;
+            }
         }
 
         if (waves == null || waves.Length == 0)
@@ -99,12 +108,36 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+        System.Random randomWay = new();
+        Transform[] randomWayPoints = allWayPoints[randomWay.Next(allWayPoints.Length)];
+
         GameObject enemyObj = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
         Enemy enemy = enemyObj.GetComponent<Enemy>();
 
+        if (randomWayPoints == null || randomWayPoints.Length == 0)
+        {
+            Debug.LogError("Random waypoints array is null or empty! In WaveManeger");
+            return;
+        }
+
+        foreach (Transform t in randomWayPoints)
+        {
+            if (t == null)
+            {
+                Debug.LogError("Once random null");
+                return;
+            }
+        }
+
         if (enemy != null)
         {
-            enemy.Initialize(waypoints);
+            if (randomWayPoints == null || randomWayPoints.Length == 0)
+            {
+                Debug.LogError("Random waypoints array is null or empty! In WaveManeger");
+                return;
+            }
+            enemy.Initialize(randomWayPoints);
+            Debug.Log(randomWayPoints);
             Debug.Log($"Enemy spawned at {spawnPoint.position}");
         }
         else

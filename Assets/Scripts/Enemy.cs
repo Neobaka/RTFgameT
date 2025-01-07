@@ -5,19 +5,23 @@ public class Enemy : MonoBehaviour
     public enum EnemyType
     {
         Normal,
-        Fast,
-        Tank,
-        Flying
+        Default,
+        PowerDefault,
+        WithShield,
+        Sniper,
+        Boss
     }
 
     public EnemyType type;
     [SerializeField] private float baseSpeed = 10f;
-    [SerializeField] private float baseHealth = 100f;
+    [SerializeField] private float baseHP = 100f;
+    [SerializeField] private float baseDamage = 100f;
     [SerializeField] private int goldReward = 50;
 
     private float speed;
-    private float health;
-    public Transform[] waypoints;
+    private float hp;
+    private float damage;
+    private Transform[] waypoints;
     public int waypointIndex = 0;
 
     public void Initialize(Transform[] points)
@@ -29,32 +33,48 @@ public class Enemy : MonoBehaviour
         // Настройка характеристик в зависимости от типа врага
         switch (type)
         {
-            case EnemyType.Fast:
-                speed = baseSpeed * 2f;
-                health = baseHealth * 0.5f;
-                break;
-            case EnemyType.Tank:
+            case EnemyType.Default:
                 speed = baseSpeed * 0.5f;
-                health = baseHealth * 2f;
+                hp = baseHP * 0.5f;
+                damage = baseDamage * 0.5f;
                 break;
-            case EnemyType.Flying:
-                speed = baseSpeed * 1.5f;
-                health = baseHealth * 0.7f;
+            case EnemyType.PowerDefault :
+                speed = baseSpeed * 0.3f;
+                hp = baseHP * 0.7f;
+                damage = baseDamage * 0.7f;
                 break;
-            default:
-                speed = baseSpeed;
-                health = baseHealth;
+            case EnemyType.WithShield:
+                speed = baseSpeed * 0.7f;
+                hp = baseHP * 0.3f;
+                damage = baseDamage * 0.7f;
+                break;
+            case EnemyType.Sniper:
+                speed = baseSpeed * 0.5f;
+                hp = baseHP * 0.5f;
+                damage = baseDamage * 0.5f;
+                break;
+            case EnemyType.Boss:
+                speed = baseSpeed * 0.2f;
+                hp = baseHP * 1f;
+                damage = baseDamage * 1f;
                 break;
         }
     }
 
     private void Update()
     {
+        Debug.Log($"Waypoints in Move: {waypoints?.Length ?? 0}");
         Move();
     }
 
     private void Move()
     {
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            Debug.LogError("Waypoints are null or empty!");
+            return;
+        }
+
         if (waypointIndex >= waypoints.Length)
         {
             ReachEnd();
@@ -62,14 +82,6 @@ public class Enemy : MonoBehaviour
         }
 
         Vector3 targetPosition = waypoints[waypointIndex].position;
-        Vector3 moveDirection = (targetPosition - transform.position).normalized;
-
-        // Добавим поворот в сторону движения
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
-        }
 
         // Движение к текущей точке
         transform.position = Vector3.MoveTowards(
@@ -88,8 +100,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        hp -= damage;
+        if (hp <= 0)
         {
             Die();
         }
