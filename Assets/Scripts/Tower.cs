@@ -13,10 +13,13 @@ public class Tower : MonoBehaviour
 
     public enum TowerType
     {
-        Basic,
-        Sniper,
-        Splash,
-        Slow
+        MainTower,
+        SniperTower,
+        CatapultTower,
+        ElectricTower,
+        MagicTower,
+        FireTower,
+        IceTower,
     }
 
     public TowerType type;

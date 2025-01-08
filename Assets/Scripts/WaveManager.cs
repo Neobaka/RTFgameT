@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
         public GameObject bossPrefab;
         public int bossCount;
         public float timeBetweenSpawns;
+        public float waveTime;
     }
 
     public Transform spawnPoint;        // Точка спавна врагов
@@ -105,29 +106,39 @@ public class WaveManager : MonoBehaviour
         //}
         //GameObject randomEnemyPrefab = wave.enemyPrefabs[Random.Range(0, wave.enemyPrefabs.Length)];
 
-        for (int i = 0; i < wave.enemyPrefabs.Length; i++)
-        {
-            // Количество врагов для текущего типа
-            int count = wave.enemyCounts[i];
+        float waveStartTime = Time.time;
 
-            for (int j = 0; j < count; j++)
-            {
-                System.Random random = new();
-                GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
-                // Спаун врага
-                SpawnEnemy(randomEnemyPrefab);
-                yield return new WaitForSeconds(wave.timeBetweenSpawns);
-            }
-        }
-        //спаун босса
-        if (wave.bossPrefab != null && wave.bossCount > 0)
+        while (Time.time - waveStartTime < wave.waveTime)
         {
-            for (int i = 0; i < wave.bossCount; i++)
+            for (int i = 0; i < wave.enemyPrefabs.Length; i++)
             {
-                SpawnEnemy(wave.bossPrefab);
-                yield return new WaitForSeconds(wave.timeBetweenSpawns);
+                // Количество врагов для текущего типа
+                int count = wave.enemyCounts[i];
+
+                for (int j = 0; j < count; j++)
+                {
+                    if (Time.time - waveStartTime >= wave.waveTime)
+                    {
+                        Debug.Log($"Время волны {Time.time}");
+                        //спаун босса
+                        if (wave.bossPrefab != null && wave.bossCount > 0)
+                        {
+                            for (int k = 0; k < wave.bossCount; k++)
+                            {
+                                SpawnEnemy(wave.bossPrefab);
+                                yield return new WaitForSeconds(wave.timeBetweenSpawns);
+                            }
+                        }
+                        break;
+                    }
+                    System.Random random = new();
+                    GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
+                    // Спаун врага
+                    SpawnEnemy(randomEnemyPrefab);
+                    yield return new WaitForSeconds(wave.timeBetweenSpawns);
+                }
             }
-        }
+        }  
     }
 
     void SpawnEnemy(GameObject enemyPrefab)
