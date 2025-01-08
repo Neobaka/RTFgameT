@@ -10,8 +10,10 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public GameObject[] enemyPrefab;
-        public int enemyCount;
+        public GameObject[] enemyPrefabs;
+        public int[] enemyCounts;
+        public GameObject bossPrefab;
+        public int bossCount;
         public float timeBetweenSpawns;
     }
 
@@ -65,10 +67,13 @@ public class WaveManager : MonoBehaviour
 
         foreach (Wave wave in waves)
         {
-            if (wave.enemyPrefab == null)
+            foreach (GameObject enemyPrefab in wave.enemyPrefabs)
             {
-                Debug.LogError("Enemy prefab is not set in one of the waves!");
-                return;
+                if (enemyPrefab == null)
+                {
+                    Debug.LogError("Enemy prefab is not set in one of the waves!");
+                    return;
+                }
             }
         }
 
@@ -93,10 +98,35 @@ public class WaveManager : MonoBehaviour
     {
         Wave wave = waves[currentWaveIndex];
 
-        for (int i = 0; i < wave.enemyCount; i++)
+        //for (int i = 0; i < wave.enemyCount; i++)
+        //{
+        //    SpawnEnemy(wave.enemyPrefab);
+        //    yield return new WaitForSeconds(wave.timeBetweenSpawns);
+        //}
+        //GameObject randomEnemyPrefab = wave.enemyPrefabs[Random.Range(0, wave.enemyPrefabs.Length)];
+
+        for (int i = 0; i < wave.enemyPrefabs.Length; i++)
         {
-            SpawnEnemy(wave.enemyPrefab);
-            yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            // Количество врагов для текущего типа
+            int count = wave.enemyCounts[i];
+
+            for (int j = 0; j < count; j++)
+            {
+                System.Random random = new();
+                GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
+                // Спаун врага
+                SpawnEnemy(randomEnemyPrefab);
+                yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            }
+        }
+        //спаун босса
+        if (wave.bossPrefab != null && wave.bossCount > 0)
+        {
+            for (int i = 0; i < wave.bossCount; i++)
+            {
+                SpawnEnemy(wave.bossPrefab);
+                yield return new WaitForSeconds(wave.timeBetweenSpawns);
+            }
         }
     }
 
