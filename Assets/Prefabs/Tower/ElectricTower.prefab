@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 462795730536034590}
   - component: {fileID: 472087330915189500}
   - component: {fileID: 8741673024844399993}
-  - component: {fileID: 1374240287852725950}
-  - component: {fileID: 4438522920595118867}
-  - component: {fileID: 8705840955802775147}
   m_Layer: 0
   m_Name: ElectricTower
   m_TagString: Untagged
@@ -112,52 +109,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1374240287852725950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5670973242925022926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2b276c00eafa5a4391d77644881aa99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4438522920595118867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5670973242925022926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d6bf8b776f7a340ae644b0cc5acbb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 70
-  explosionRadius: 0
-  impactEffect: {fileID: 0}
---- !u!114 &8705840955802775147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5670973242925022926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bc9147cc8449ba4d92ae8b08bfb5734, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  cost: 100
-  icon: {fileID: 0}
-  upgrades: []
-  damage: 10
-  range: 5
-  fireRate: 1
-  projectilePrefab: {fileID: 0}
-  rangeIndicator: {fileID: 0}
-  firePoint: {fileID: 0}

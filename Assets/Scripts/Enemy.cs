@@ -15,14 +15,16 @@ public class Enemy : MonoBehaviour
     public EnemyType type;
     [SerializeField] private float baseSpeed = 10f;
     [SerializeField] private float baseHP = 100f;
-    [SerializeField] private float baseDamage = 100f;
+    [SerializeField] private float baseDamage = 10f;
     [SerializeField] private int goldReward = 50;
 
     private float speed;
     private float hp;
     private float damage;
     private Transform[] waypoints;
-    public int waypointIndex = 0;
+    private int waypointIndex = 0;
+
+    private Transform targetMainTower; // Цель для атаки - MainTower
 
     public void Initialize(Transform[] points)
     {
@@ -38,7 +40,7 @@ public class Enemy : MonoBehaviour
                 hp = baseHP * 0.5f;
                 damage = baseDamage * 0.5f;
                 break;
-            case EnemyType.PowerDefault :
+            case EnemyType.PowerDefault:
                 speed = baseSpeed * 0.3f;
                 hp = baseHP * 0.7f;
                 damage = baseDamage * 0.7f;
@@ -61,10 +63,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Ищем MainTower
+        targetMainTower = GameObject.FindGameObjectWithTag("MainTower")?.transform;
+    }
+
     private void Update()
     {
-        Debug.Log($"Waypoints in Move: {waypoints?.Length ?? 0}");
         Move();
+
+        // Если враг достиг MainTower, наносим ему урон
+        if (targetMainTower != null && Vector3.Distance(transform.position, targetMainTower.position) < 1f)
+        {
+            AttackMainTower();
+        }
     }
 
     private void Move()
@@ -95,6 +108,20 @@ public class Enemy : MonoBehaviour
         {
             waypointIndex++;
             Debug.Log($"Reached waypoint {waypointIndex}");
+        }
+    }
+
+    private void AttackMainTower()
+    {
+        if (targetMainTower != null)
+        {
+            Tower mainTower = targetMainTower.GetComponent<Tower>();
+            if (mainTower != null)
+            {
+                mainTower.TakeDamage(damage); // Наносим урон MainTower
+                Debug.Log($"MainTower took {damage} damage.");
+                Destroy(gameObject); // Уничтожаем врага после атаки
+            }
         }
     }
 

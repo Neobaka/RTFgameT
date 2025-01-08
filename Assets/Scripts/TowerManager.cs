@@ -170,6 +170,7 @@ public class TowerManager : MonoBehaviour
                 CancelTowerPlacement();
             }
         }
+
     }
 
     //void UpdateTowerPreview()

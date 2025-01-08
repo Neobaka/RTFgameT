@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2020177426470080265}
   - component: {fileID: 3308008346236810450}
   - component: {fileID: 2576158886639919853}
-  - component: {fileID: 6189412024041837947}
-  - component: {fileID: 4952848619039898595}
   - component: {fileID: 1772963230495521423}
   m_Layer: 0
   m_Name: MainTower
@@ -112,33 +110,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6189412024041837947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6255342827330548524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2b276c00eafa5a4391d77644881aa99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4952848619039898595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6255342827330548524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d6bf8b776f7a340ae644b0cc5acbb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 70
-  explosionRadius: 0
-  impactEffect: {fileID: 0}
 --- !u!114 &1772963230495521423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +132,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   rangeIndicator: {fileID: 0}
   firePoint: {fileID: 0}
+  isMainTower: 0
