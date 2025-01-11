@@ -69,12 +69,25 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    //void DamageEnemy(Transform enemyTransform)
+    //{
+    //    Enemy enemy = enemyTransform.GetComponent<Enemy>();
+    //    if (enemy != null)
+    //    {
+    //        enemy.TakeDamage(damage);
+    //    }
+    //}
     void DamageEnemy(Transform enemyTransform)
     {
         Enemy enemy = enemyTransform.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
+            Debug.Log($"Dealt {damage} damage to {enemy.name}");
+        }
+        else
+        {
+            Debug.LogError($"Enemy component not found on {enemyTransform.name}");
         }
     }
 

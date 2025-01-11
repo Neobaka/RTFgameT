@@ -337,40 +337,49 @@ public class Tower : MonoBehaviour
 
     private void Shoot()
     {
+        //GameObject projectileGO = Instantiate(projectilePrefab,
+        //    firePoint != null ? firePoint.position : transform.position,
+        //    Quaternion.identity);
+        //Projectile projectile = projectileGO.GetComponent<Projectile>();
+
+        //if (projectile != null)
+        //{
+        //    // Для разных башен меняем поведение снарядов
+        //    switch (type)
+        //    {
+        //        case TowerType.MainTower:
+        //        case TowerType.SniperTower:
+        //            projectile.Initialize(target, damage);
+        //            break;
+        //        case TowerType.CatapultTower:
+        //            projectile.Initialize(target, damage); // Логика для усиленных снарядов с эффектами
+        //            break;
+        //        case TowerType.ElectricTower:
+        //            // Логика для электрического снаряда с отскоком
+        //            projectile.Initialize(target, damage);
+        //            break;
+        //        case TowerType.MagicTower:
+        //            // Логика для магической ауры
+        //            projectile.Initialize(target, damage);
+        //            break;
+        //        case TowerType.FireTower:
+        //            // Логика для огненных снарядов
+        //            projectile.Initialize(target, damage);
+        //            break;
+        //        case TowerType.IceTower:
+        //            // Логика для ледяных снарядов
+        //            projectile.Initialize(target, damage);
+        //            break;
+        //    }
+        //}
         GameObject projectileGO = Instantiate(projectilePrefab,
-            firePoint != null ? firePoint.position : transform.position,
-            Quaternion.identity);
+        firePoint != null ? firePoint.position : transform.position,
+        Quaternion.identity);
         Projectile projectile = projectileGO.GetComponent<Projectile>();
 
         if (projectile != null)
         {
-            // Для разных башен меняем поведение снарядов
-            switch (type)
-            {
-                case TowerType.MainTower:
-                case TowerType.SniperTower:
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.CatapultTower:
-                    projectile.Initialize(target, damage); // Логика для усиленных снарядов с эффектами
-                    break;
-                case TowerType.ElectricTower:
-                    // Логика для электрического снаряда с отскоком
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.MagicTower:
-                    // Логика для магической ауры
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.FireTower:
-                    // Логика для огненных снарядов
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.IceTower:
-                    // Логика для ледяных снарядов
-                    projectile.Initialize(target, damage);
-                    break;
-            }
+            projectile.Initialize(target, damage);
         }
     }
 

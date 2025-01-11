@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    private bool educationBeen = false;
 
     [Header("Menu Panels")]
     public GameObject mainMenuPanel;
@@ -35,6 +36,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (settingsPanel == null)
+        {
+            Debug.LogError("Settings Panel is not assigned in GameManager!");
+            return;
+        }
     }
 
     public void SetGameSceneObjects(Text gold, Text health) //инициализация локальных объектов
@@ -49,7 +56,20 @@ public class GameManager : MonoBehaviour
         Debug.Log("Play button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
-        SceneManager.LoadScene("GameScene");
+        if (educationBeen)
+            SceneManager.LoadScene("1");
+        else
+            SceneManager.LoadScene("EducationScene");
+        currentGold = startingGold;
+
+    }
+
+    public void PlayEducation()//кнопка игры
+    {
+        Debug.Log("PlayEducation button clicked!");
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        SceneManager.LoadScene("EducationScene");
         currentGold = startingGold;
 
     }
@@ -73,15 +93,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("MenuButton clicked!");
         mainMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
-        creditsPanel.SetActive(false);
+        creditsPanel?.SetActive(false);
     }
 
     public void ShowSettings()//кнопка настроек
     {
+        Debug.Log("ShowSettings function triggered.");
+
         Debug.Log("SettingsButton clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
-        creditsPanel.SetActive(false);
+        creditsPanel?.SetActive(false);
     }
 
     //public void ShowCredits()
