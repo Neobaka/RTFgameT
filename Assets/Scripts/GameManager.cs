@@ -39,9 +39,10 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
+        Debug.Log("Play button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
-        SceneManager.LoadScene("Scene_1_lvl");
+        SceneManager.LoadScene("GameScene");
         currentGold = startingGold;
 
     }
@@ -54,8 +55,15 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("StartMenuScene");
+    }
+
+
     public void ShowMainMenu()
     {
+        Debug.Log("MenuButton clicked!");
         mainMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
         creditsPanel.SetActive(false);
@@ -63,17 +71,18 @@ public class GameManager : MonoBehaviour
 
     public void ShowSettings()
     {
+        Debug.Log("SettingsButton clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
         creditsPanel.SetActive(false);
     }
 
-    public void ShowCredits()
-    {
-        mainMenuPanel.SetActive(false);
-        settingsPanel.SetActive(false);
-        creditsPanel.SetActive(true);
-    }
+    //public void ShowCredits()
+    //{
+    //    mainMenuPanel.SetActive(false);
+    //    settingsPanel.SetActive(false);
+    //    creditsPanel.SetActive(true);
+    //}
 
     public void SetVolume(float volume)
     {
