@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public int CurrentGold => currentGold;
 
-    private void Awake()
+    private void Awake()//реализация синглтона
     {
         if (Instance == null)
         {
@@ -37,7 +37,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Play()
+    public void SetGameSceneObjects(Text gold, Text health) //инициализация локальных объектов
+    {
+        goldText = gold;
+        healthText = health;
+    }
+
+
+    public void Play()//кнопка игры
     {
         Debug.Log("Play button clicked!");
         mainMenuPanel.SetActive(false);
@@ -47,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void QuitGame()
+    public void QuitGame()//кнопка выхода из игры
     {
         Application.Quit();
 #if UNITY_EDITOR
@@ -55,7 +62,7 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    public void ReturnToMainMenu()
+    public void ReturnToMainMenu()//выход в главное меню
     {
         SceneManager.LoadScene("StartMenuScene");
     }
@@ -69,7 +76,7 @@ public class GameManager : MonoBehaviour
         creditsPanel.SetActive(false);
     }
 
-    public void ShowSettings()
+    public void ShowSettings()//кнопка настроек
     {
         Debug.Log("SettingsButton clicked!");
         mainMenuPanel.SetActive(false);
@@ -84,24 +91,24 @@ public class GameManager : MonoBehaviour
     //    creditsPanel.SetActive(true);
     //}
 
-    public void SetVolume(float volume)
+    public void SetVolume(float volume)//звук
     {
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("Volume", volume);
     }
 
-    public void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen(bool isFullscreen)//экран
     {
         Screen.fullScreen = isFullscreen;
         PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);
     }
-    public void AddGold(int amount)
+    public void AddGold(int amount)//начисление золота
     {
         currentGold += amount;
         UpdateUI();
     }
 
-    public bool SpendGold(int amount)
+    public bool SpendGold(int amount)//страта золота
     {
         if (currentGold >= amount)
         {
@@ -112,7 +119,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void ReduceHealth()
+    public void ReduceHealth()//получение урона
     {
         currentHealth--;
         if (currentHealth <= 0)
@@ -128,7 +135,7 @@ public class GameManager : MonoBehaviour
         if (healthText != null) healthText.text = "Health: " + currentHealth;
     }
 
-    private void GameOver()
+    private void GameOver()//конец игры
     {
         Debug.Log("Game Over!");
         // Implement game over logic here
