@@ -44,12 +44,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGameSceneObjects(Text gold, Text health) //инициализация локальных объектов
+    //public void SetGameSceneObjects(Text gold, Text health) //инициализация локальных объектов
+    //{
+    //    goldText = gold;
+    //    healthText = health;
+    //}
+    public void TestClick()
     {
-        goldText = gold;
-        healthText = health;
+        Debug.Log("Кнопка нажата!");
     }
-
 
     public void Play()//кнопка игры
     {
