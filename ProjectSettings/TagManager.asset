@@ -49,6 +49,9 @@ TagManager:
   - name: Props
     uniqueID: 2618089317
     locked: 0
+  - name: Spot
+    uniqueID: 3915157549
+    locked: 0
   - name: UI
     uniqueID: 3694248613
     locked: 0

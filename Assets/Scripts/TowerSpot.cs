@@ -34,13 +34,13 @@ using UnityEngine;
 public class TowerSpot : MonoBehaviour
 {
     [SerializeField] private bool isOccupied = false;
-    private Renderer spotRenderer;
+    private SpriteRenderer spotRenderer;
 
     public bool IsOccupied => isOccupied;
 
     private void Awake()
     {
-        spotRenderer = GetComponent<Renderer>();
+        spotRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetOccupied(bool state)
@@ -84,7 +84,19 @@ public class TowerSpot : MonoBehaviour
         {
             Debug.Log("Color changed");
             // Можно настроить цвет подсветки здесь
-            spotRenderer.material.color = highlight ? Color.green : Color.white;
+            //spotRenderer.color = highlight ? Color.green, Color.a = 90 : Color.white, Color.a = 90;
+            if (highlight)
+            {
+                Color color = Color.green;
+                color.a = 0.3f;
+                spotRenderer.color = color;
+            }
+            else
+            {
+                Color color = Color.white;
+                color.a = 0.3f;
+                spotRenderer.color = color;
+            }
         }
     }
 }

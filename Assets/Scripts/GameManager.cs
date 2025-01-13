@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("Menu Panels")]
     public GameObject mainMenuPanel;
     public GameObject settingsPanel;
+    public GameObject GameOverPanel;
     public GameObject creditsPanel;
 
     [Header("Settings")]
@@ -59,10 +60,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Play button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
-        if (educationBeen)
-            SceneManager.LoadScene("1");
-        else
-            SceneManager.LoadScene("EducationScene");
+        //GameOverPanel.SetActive(false);
+        //if (educationBeen)
+        //    SceneManager.LoadScene("1");
+        //else
+        //    SceneManager.LoadScene("EducationScene");
+        SceneManager.LoadScene(1);
         currentGold = startingGold;
 
     }
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("PlayEducation button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
+        //GameOverPanel.SetActive(false);
         SceneManager.LoadScene("EducationScene");
         currentGold = startingGold;
 
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
         mainMenuPanel.SetActive(true);
         settingsPanel.SetActive(false);
         creditsPanel?.SetActive(false);
+        //GameOverPanel.SetActive(false);
     }
 
     public void ShowSettings()//кнопка настроек
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(true);
         creditsPanel?.SetActive(false);
+        //GameOverPanel.SetActive(false);
     }
 
     //public void ShowCredits()
@@ -163,6 +169,9 @@ public class GameManager : MonoBehaviour
     private void GameOver()//конец игры
     {
         Debug.Log("Game Over!");
+        //SceneManager.Pause(1);
+        //SceneManager.Pause(2);
+       // GameOverPanel.SetActive(true);
         // Implement game over logic here
     }
 }

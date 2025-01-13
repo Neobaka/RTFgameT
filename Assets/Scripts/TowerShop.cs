@@ -150,8 +150,8 @@ public class TowerShop : MonoBehaviour
         previewTower = Instantiate(selectedTowerPrefab);
 
         // Делаем башню полупрозрачной для предпросмотра
-        Renderer[] renderers = previewTower.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in renderers)
+        SpriteRenderer[] renderers = previewTower.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer renderer in renderers)
         {
             Material material = renderer.material;
             Color color = material.color;
