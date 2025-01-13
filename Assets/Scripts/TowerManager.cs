@@ -528,6 +528,8 @@ public class TowerManager : MonoBehaviour
 
     [SerializeField] private List<TowerOption> towerOptions;
     [SerializeField] private int playerMoney = 100;
+    [SerializeField] private TMPro.TextMeshProUGUI goldText; // UI для отображения золота
+
 
     public List<TowerOption> TowerOptions => towerOptions;
 
@@ -541,6 +543,19 @@ public class TowerManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        UpdateGoldUI();
+    }
+
+    private void UpdateGoldUI()
+    {
+        if (goldText != null)
+        {
+            goldText.text = $"{playerMoney}";
+        }
     }
 
     public void SelectTower(int index)
@@ -569,6 +584,7 @@ public class TowerManager : MonoBehaviour
     {
         playerMoney -= amount;
         Debug.Log($"Player money: {playerMoney}");
+        UpdateGoldUI();
     }
 
     public void TryPlaceTower(Vector3 position, TowerSpot spot)
@@ -602,9 +618,9 @@ public class TowerManager : MonoBehaviour
         if (tower != null)
         {
             Debug.Log($"Destroying tower: {tower.name}");
-            Destroy(tower);
             RefundMoney(spot.GetRefundAmount());
-            spot.SetOccupied(false, null);
+            spot.SetOccupied(false, tower);
+            Destroy(tower);
 
             Debug.Log($"Removing tower: {tower?.name} from spot: {spot.gameObject.name}");
         }
@@ -618,7 +634,8 @@ public class TowerManager : MonoBehaviour
     public void RefundMoney(int amount)
     {
         playerMoney += amount;
-        Debug.Log($"Player money refunded: {playerMoney}");
+        Debug.Log($"Player money refunded: {amount}");
+        UpdateGoldUI();
     }
 
 }

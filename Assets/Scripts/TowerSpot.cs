@@ -24,8 +24,17 @@ public class TowerSpot : MonoBehaviour
         if (tower != null)
         {
             // Определяем возврат средств (50% стоимости башни)
-            TowerManager.TowerOption option = TowerManager.Instance?.TowerOptions.Find(o => o.towerPrefab == tower);
-            refundAmount = option != null ? option.cost / 2 : 0;
+            TowerManager.TowerOption option = TowerManager.Instance?.TowerOptions.Find(o => o.towerPrefab.name == tower.name);
+            if (option != null)
+            {
+                refundAmount = option.cost / 2;
+                Debug.Log($"За башню вернется денег {tower?.name}: {refundAmount}");
+            }
+            else
+            {
+                refundAmount = 0;
+                Debug.LogError("За бащню денег не будет: " + tower?.name);
+            }
         }
         else
         {

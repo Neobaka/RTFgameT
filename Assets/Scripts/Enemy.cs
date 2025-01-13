@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -24,15 +25,15 @@ public class Enemy : MonoBehaviour
     private Transform[] waypoints;
     private int waypointIndex = 0;
 
-    private Transform targetMainTower; // Цель для атаки - MainTower
+    private Transform targetMainTower; // Цель - MainTower
+    private bool isAttackingMainTower = false; // Проверка, чтобы не запускать корутину несколько раз
 
     public void Initialize(Transform[] points)
     {
         waypoints = points;
         transform.position = waypoints[0].position;
-        Debug.Log($"Initialized with {points.Length} waypoints");
 
-        // Настройка характеристик в зависимости от типа врага
+        // Установка параметров в зависимости от типа врага
         switch (type)
         {
             case EnemyType.Default:
@@ -65,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        // Ищем MainTower
+        // Находим MainTower
         targetMainTower = GameObject.FindGameObjectWithTag("MainTower")?.transform;
     }
 
@@ -73,8 +74,8 @@ public class Enemy : MonoBehaviour
     {
         Move();
 
-        // Если враг достиг MainTower, наносим ему урон
-        if (targetMainTower != null && Vector3.Distance(transform.position, targetMainTower.position) < 1f)
+        // Если враг достигает MainTower, начинает атаку
+        if (targetMainTower != null && Vector3.Distance(transform.position, targetMainTower.position) < 9f)
         {
             AttackMainTower();
         }
@@ -82,6 +83,12 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
+        // Остановка врага, если он близко к MainTower
+        if (targetMainTower != null && Vector3.Distance(transform.position, targetMainTower.position) < 8f)
+        {
+            return;
+        }
+
         if (waypoints == null || waypoints.Length == 0)
         {
             Debug.LogError("Waypoints are null or empty!");
@@ -96,33 +103,50 @@ public class Enemy : MonoBehaviour
 
         Vector3 targetPosition = waypoints[waypointIndex].position;
 
-        // Движение к текущей точке
+        // Движение к следующей точке
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPosition,
             speed * Time.deltaTime
         );
 
-        // Проверка достижения текущей точки
+        // Если достигли точки, переход к следующей
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             waypointIndex++;
-            Debug.Log($"Reached waypoint {waypointIndex}");
         }
     }
 
     private void AttackMainTower()
     {
-        if (targetMainTower != null)
+        if (!isAttackingMainTower)
         {
+            StartCoroutine(AttackMainTowerRoutine());
+        }
+    }
+
+    private IEnumerator AttackMainTowerRoutine()
+    {
+        isAttackingMainTower = true;
+        Debug.Log("Started attacking MainTower!");
+
+        while (targetMainTower != null && Vector3.Distance(transform.position, targetMainTower.position) < 9f)
+        {
+            Debug.Log("Enemy is attacking MainTower...");
             Tower mainTower = targetMainTower.GetComponent<Tower>();
             if (mainTower != null)
             {
-                mainTower.TakeDamage(damage); // Наносим урон MainTower
+                Debug.Log("Тавер существует!");
+                mainTower.TakeDamage(damage);
                 Debug.Log($"MainTower took {damage} damage.");
-                Destroy(gameObject); // Уничтожаем врага после атаки
             }
+            else Debug.Log("Тавер равен null!");
+
+            yield return new WaitForSeconds(1f);
         }
+
+        Debug.Log("Stopped attacking MainTower.");
+        isAttackingMainTower = false;
     }
 
     public void TakeDamage(float damage)

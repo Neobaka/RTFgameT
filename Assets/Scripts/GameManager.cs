@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private bool educationBeen = false;
 
     [Header("Menu Panels")]
     public GameObject mainMenuPanel;
@@ -18,12 +17,11 @@ public class GameManager : MonoBehaviour
     public Toggle fullscreenToggle;
 
     [SerializeField] private int startingGold = 100;
-    [SerializeField] private int startingHealth = 100;
     [SerializeField] private Text goldText;
     [SerializeField] private Text healthText;
 
     private int currentGold;
-    private int currentHealth;
+    private Tower mainTower; // Ссылка на основную башню (MainTower)
 
     public int CurrentGold => currentGold;
 
@@ -37,109 +35,22 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (settingsPanel == null)
-        {
-            Debug.LogError("Settings Panel is not assigned in GameManager!");
-            return;
-        }
     }
 
-    //public void SetGameSceneObjects(Text gold, Text health) //инициализация локальных объектов
-    //{
-    //    goldText = gold;
-    //    healthText = health;
-    //}
-    public void TestClick()
+    public void SetGameSceneObjects(Text gold, Text health, Tower mainTower) //инициализация локальных объектов
     {
-        Debug.Log("Кнопка нажата!");
+        goldText = gold;
+        healthText = health;
+        this.mainTower = mainTower; // Устанавливаем ссылку на MainTower
     }
 
-    public void Play()//кнопка игры
-    {
-        Debug.Log("Play button clicked!");
-        mainMenuPanel.SetActive(false);
-        settingsPanel.SetActive(false);
-        //GameOverPanel.SetActive(false);
-        //if (educationBeen)
-        //    SceneManager.LoadScene("1");
-        //else
-        //    SceneManager.LoadScene("EducationScene");
-        SceneManager.LoadScene(1);
-        currentGold = startingGold;
-
-    }
-
-    public void PlayEducation()//кнопка игры
-    {
-        Debug.Log("PlayEducation button clicked!");
-        mainMenuPanel.SetActive(false);
-        settingsPanel.SetActive(false);
-        //GameOverPanel.SetActive(false);
-        SceneManager.LoadScene("EducationScene");
-        currentGold = startingGold;
-
-    }
-
-    public void QuitGame()//кнопка выхода из игры
-    {
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-    }
-
-    public void ReturnToMainMenu()//выход в главное меню
-    {
-        SceneManager.LoadScene("StartMenuScene");
-    }
-
-
-    public void ShowMainMenu()
-    {
-        Debug.Log("MenuButton clicked!");
-        mainMenuPanel.SetActive(true);
-        settingsPanel.SetActive(false);
-        creditsPanel?.SetActive(false);
-        //GameOverPanel.SetActive(false);
-    }
-
-    public void ShowSettings()//кнопка настроек
-    {
-        Debug.Log("ShowSettings function triggered.");
-
-        Debug.Log("SettingsButton clicked!");
-        mainMenuPanel.SetActive(false);
-        settingsPanel.SetActive(true);
-        creditsPanel?.SetActive(false);
-        //GameOverPanel.SetActive(false);
-    }
-
-    //public void ShowCredits()
-    //{
-    //    mainMenuPanel.SetActive(false);
-    //    settingsPanel.SetActive(false);
-    //    creditsPanel.SetActive(true);
-    //}
-
-    public void SetVolume(float volume)//звук
-    {
-        AudioListener.volume = volume;
-        PlayerPrefs.SetFloat("Volume", volume);
-    }
-
-    public void SetFullscreen(bool isFullscreen)//экран
-    {
-        Screen.fullScreen = isFullscreen;
-        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);
-    }
-    public void AddGold(int amount)//начисление золота
+    public void AddGold(int amount)
     {
         currentGold += amount;
         UpdateUI();
     }
 
-    public bool SpendGold(int amount)//страта золота
+    public bool SpendGold(int amount)
     {
         if (currentGold >= amount)
         {
@@ -150,20 +61,22 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void ReduceHealth()//получение урона
+    public void ReduceHealth()
     {
-        currentHealth--;
-        if (currentHealth <= 0)
+        // Если здоровье уменьшилось, вызываем обновление HP бара для MainTower
+        if (mainTower != null)
         {
-            GameOver();
+            mainTower.UpdateHpBar();
         }
-        UpdateUI();
+
+        // Логика получения урона (например, уменьшение здоровья игрока)
+        // Здесь можно добавить логику, которая будет уменьшать здоровье игрока и обновлять UI
     }
 
     private void UpdateUI()
     {
         if (goldText != null) goldText.text = "Gold: " + currentGold;
-        if (healthText != null) healthText.text = "Health: " + currentHealth;
+        if (healthText != null) healthText.text = "Health: " + currentGold;
     }
 
     private void GameOver()//конец игры
@@ -171,7 +84,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
         //SceneManager.Pause(1);
         //SceneManager.Pause(2);
-       // GameOverPanel.SetActive(true);
+        // GameOverPanel.SetActive(true);
         // Implement game over logic here
     }
 }
