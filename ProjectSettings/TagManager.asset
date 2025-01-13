@@ -55,5 +55,8 @@ TagManager:
   - name: Spot
     uniqueID: 3915157549
     locked: 0
+  - name: Menu
+    uniqueID: 2231325653
+    locked: 0
   m_RenderingLayers:
   - Default

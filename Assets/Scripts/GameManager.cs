@@ -79,12 +79,26 @@ public class GameManager : MonoBehaviour
         if (healthText != null) healthText.text = "Health: " + currentGold;
     }
 
-    private void GameOver()//конец игры
+    public void PauseGame()
+    {
+        Time.timeScale = 0f; // Останавливает время
+        Debug.Log("Game paused.");
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f; // Возвращает время в нормальный ход
+        Debug.Log("Game resumed.");
+    }
+
+    public void GameOver()//конец игры
     {
         Debug.Log("Game Over!");
-        //SceneManager.Pause(1);
-        //SceneManager.Pause(2);
-        // GameOverPanel.SetActive(true);
-        // Implement game over logic here
+        PauseGame();
+
+        if (GameOverPanel != null)
+        {
+            GameOverPanel.SetActive(true); // Отображаем экран "Game Over"
+        }
     }
 }

@@ -121,6 +121,7 @@ public class Tower : MonoBehaviour
         if (isMainTower && health <= 0f)
         {
             Destroy(gameObject); // ”ничтожаем MainTower, если здоровье <= 0
+            GameManager.Instance.GameOver();
         }
 
         if (target == null)
