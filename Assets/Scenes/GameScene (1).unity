@@ -1041,7 +1041,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1541,7 +1541,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 194300691}
-  costText: {fileID: 1460065197}
+  button: {fileID: 240588517}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
 --- !u!1 &389406208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,7 +2559,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -2678,7 +2683,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -2874,7 +2879,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1708977129}
-  costText: {fileID: 319921337}
+  button: {fileID: 0}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
 --- !u!1001 &583459771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,6 +3056,7 @@ Transform:
   - {fileID: 780188571}
   - {fileID: 1467452523}
   - {fileID: 1584421253}
+  - {fileID: 1832055285}
   m_Father: {fileID: 1889019853}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &628206935
@@ -3131,7 +3142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -3255,7 +3266,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -3594,7 +3605,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -3826,7 +3837,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 716102677}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1002834764}
+        m_TargetAssemblyTypeName: TowerShop, Assembly-CSharp
+        m_MethodName: SelectTower
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &716102677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4235,7 +4258,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -600718683
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4362,7 +4385,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -5125,7 +5148,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -5210,7 +5233,7 @@ GameObject:
   - component: {fileID: 903599435}
   m_Layer: 5
   m_Name: BG
-  m_TagString: Untagged
+  m_TagString: MainTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5641,7 +5664,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 935870063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1002834764}
+        m_TargetAssemblyTypeName: TowerShop, Assembly-CSharp
+        m_MethodName: SelectTower
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &935870063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6002,26 +6037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad93f1c218996641be0d40a9ce6dd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerButtons:
-  - towerPrefab: {fileID: 499986628}
-    cost: 0
-    button: {fileID: 935870062}
-  - towerPrefab: {fileID: 918163938}
-    cost: 0
-    button: {fileID: 479758970}
-  - towerPrefab: {fileID: 1564857084}
-    cost: 0
-    button: {fileID: 240588517}
-  - towerPrefab: {fileID: 19203877}
-    cost: 0
-    button: {fileID: 0}
-  - towerPrefab: {fileID: 780188570}
-    cost: 0
-    button: {fileID: 477777964}
-  - towerPrefab: {fileID: 1467452522}
-    cost: 0
-    button: {fileID: 716102676}
-  previewAlpha: 0.5
 --- !u!1 &1003112130
 GameObject:
   m_ObjectHideFlags: 0
@@ -7147,7 +7162,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -7407,7 +7422,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -7531,7 +7546,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -7652,7 +7667,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 2141686374}
-  costText: {fileID: 1297607435}
+  button: {fileID: 0}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
 --- !u!1001 &1220452668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8290,7 +8310,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -8564,7 +8584,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -600718683
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8706,7 +8726,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -9434,7 +9454,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -9846,6 +9866,57 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 84475085}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1698564891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698564893}
+  - component: {fileID: 1698564892}
+  m_Layer: 0
+  m_Name: TowerShopButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1698564892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698564891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c77c14307e71844ad398a7d95c0dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 194300691}
+  button: {fileID: 240588517}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
+--- !u!4 &1698564893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698564891}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.872452, y: -2.41432, z: 706.2242}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699891701
 GameObject:
@@ -10443,7 +10514,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -10679,7 +10750,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 1376491042}
-  costText: {fileID: 169350737}
+  button: {fileID: 0}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
 --- !u!1 &1808197575
 GameObject:
   m_ObjectHideFlags: 0
@@ -10710,6 +10786,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 84475085}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1832055284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832055285}
+  m_Layer: 0
+  m_Name: TowersPreview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1832055285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832055284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 599890643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1848508923 stripped
 GameObject:
@@ -10763,7 +10870,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -11283,7 +11390,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
@@ -11399,49 +11506,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed44f637855c676489559fff5c4c9f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedTower:
-    towerPrefab: {fileID: 0}
+  towerOptions:
+  - towerName: SniperTower
+    towerPrefab: {fileID: 499986628}
     cost: 0
-    icon: {fileID: 0}
-    towerName: 
-  towerSpotLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  availableTowers:
-  - towerPrefab: {fileID: 0}
+  - towerName: CatapultTower
+    towerPrefab: {fileID: 918163938}
     cost: 0
-    icon: {fileID: 0}
-    towerName: SniperTower
-  - towerPrefab: {fileID: 0}
+  - towerName: ElectricTower
+    towerPrefab: {fileID: 1564857084}
     cost: 0
-    icon: {fileID: 0}
-    towerName: CatapultTower
-  - towerPrefab: {fileID: 0}
+  - towerName: MagicTower
+    towerPrefab: {fileID: 19203877}
     cost: 0
-    icon: {fileID: 0}
-    towerName: ElectricTower
-  - towerPrefab: {fileID: 0}
+  - towerName: FireTower
+    towerPrefab: {fileID: 780188570}
     cost: 0
-    icon: {fileID: 0}
-    towerName: MagicTower
-  - towerPrefab: {fileID: 0}
+  - towerName: IceTower
+    towerPrefab: {fileID: 1467452522}
     cost: 0
-    icon: {fileID: 0}
-    towerName: FireTower
-  - towerPrefab: {fileID: 0}
-    cost: 0
-    icon: {fileID: 0}
-    towerName: IceTower
-  placementArea:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  towerSpotPrefab: {fileID: 0}
-  validPlacementMaterial: {fileID: 0}
-  invalidPlacementMaterial: {fileID: 0}
-  towerButtonPrefab: {fileID: 0}
-  towerButtonsParent: {fileID: 0}
-  goldText: {fileID: 0}
-  tooltipText: {fileID: 0}
+  playerMoney: 100
 --- !u!4 &2024949172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6214692909623576843, guid: 2049916b6e1e3ac47baf192490c3582a, type: 3}
@@ -11496,7 +11580,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 702974685}
-  costText: {fileID: 1733520669}
+  button: {fileID: 0}
+  towerOption:
+    towerName: 
+    cost: 0
+    towerPrefab: {fileID: 0}
+    icon: {fileID: 0}
 --- !u!1001 &2074718490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12118,12 +12207,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 599890643}
     m_Modifications:
     - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.2521164
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.2521164
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.2521164
+      objectReference: {fileID: 0}
+    - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.4
+      value: -38.3
       objectReference: {fileID: 0}
     - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24.9
+      value: -25.4
       objectReference: {fileID: 0}
     - target: {fileID: 2770011486139338393, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12160,6 +12261,10 @@ PrefabInstance:
     - target: {fileID: 4615167139291885634, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
       propertyPath: m_Name
       value: MainTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517124419694046944, guid: 7b182fb7351cd4f42b4c159d6c302c7b, type: 3}
+      propertyPath: range
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12355,6 +12460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield >:(
       objectReference: {fileID: 0}
+    - target: {fileID: 8306208389944616227, guid: e07ef5f7fcd167a4a981133a14d2db87, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12476,6 +12585,10 @@ PrefabInstance:
     - target: {fileID: 3439433592262491581, guid: c34bbafb169478e4088a2971b4cb3cbe, type: 3}
       propertyPath: m_Name
       value: Power Default 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439433592262491581, guid: c34bbafb169478e4088a2971b4cb3cbe, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4815881597489892158, guid: c34bbafb169478e4088a2971b4cb3cbe, type: 3}
       propertyPath: m_Sprite
@@ -12695,10 +12808,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -379809747
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 293dd0d2ec0129040983a16c43b9520b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12882,6 +12995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4534819535623946543, guid: 80d1ebffaba17ef4bbbbc016df0f900f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7929165602193157517, guid: 80d1ebffaba17ef4bbbbc016df0f900f, type: 3}
       propertyPath: m_Size.x
       value: 0.2
@@ -12982,6 +13099,10 @@ PrefabInstance:
     - target: {fileID: 4042472152436514952, guid: 65b89fa101e7a6544aac2420bcf45fa2, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042472152436514952, guid: 65b89fa101e7a6544aac2420bcf45fa2, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6548804790206860278, guid: 65b89fa101e7a6544aac2420bcf45fa2, type: 3}
       propertyPath: m_Sprite
@@ -13381,5 +13502,6 @@ SceneRoots:
   - {fileID: 1398581113}
   - {fileID: 2015800287}
   - {fileID: 752096571}
+  - {fileID: 1698564893}
   - {fileID: 848085332}
   - {fileID: 799581919}

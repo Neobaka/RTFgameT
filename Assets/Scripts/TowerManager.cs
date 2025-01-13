@@ -393,6 +393,124 @@
 //        return selectedTower != null && selectedTower.towerPrefab != null;
 //    }
 //}
+//using System.Collections.Generic;
+//using UnityEngine;
+
+//public class TowerManager : MonoBehaviour
+//{
+//    public static TowerManager Instance { get; private set; }
+
+//    [System.Serializable]
+//    public class TowerOption
+//    {
+//        public string towerName;
+//        public int cost;
+//        public GameObject towerPrefab;      
+//        public Sprite icon;
+//    }
+
+//    [SerializeField] private List<TowerOption> towerOptions;
+//    public List<TowerOption> TowerOptions => towerOptions;
+//    [SerializeField] private int playerMoney = 100;
+//    [SerializeField] private List<GameObject> previewTower;
+
+//    private TowerOption selectedTower;
+
+//    private void Awake()
+//    {
+//        if (Instance != null && Instance != this)
+//        {
+//            Destroy(gameObject);
+//            return;
+//        }
+//        Instance = this;
+//    }
+
+//    public void SelectTower(int index)
+//    {
+//        if (index < 0 || index >= towerOptions.Count)
+//        {
+//            Debug.LogError("Invalid tower index!");
+//            return;
+//        }
+
+//        selectedTower = towerOptions[index];
+//        Debug.Log($"Selected tower: {selectedTower.towerName}");
+//    }
+
+//    public bool HasSelectedTower()
+//    {
+//        return selectedTower != null;
+//    }
+
+//    public bool CanAffordSelectedTower()
+//    {
+//        return selectedTower != null && playerMoney >= selectedTower.cost;
+//    }
+
+//    public void SpendMoney(int amount)
+//    {
+//        playerMoney -= amount;
+//        Debug.Log($"Player money: {playerMoney}");
+//    }
+
+//    public void RefundMoney(int amount)
+//    {
+//        playerMoney += amount;
+//        Debug.Log($"Player money refunded: {playerMoney}");
+//    }
+
+//    public void TryPlaceTower(Vector3 position, TowerSpot spot)
+//    {
+//        if (selectedTower == null || spot.IsOccupied || !CanAffordSelectedTower())
+//        {
+//            Debug.LogWarning("Cannot place tower!");
+//            return;
+//        }
+
+//        GameObject tower = Instantiate(selectedTower.towerPrefab, position, Quaternion.identity);
+//        spot.SetOccupied(true, tower);
+//        SpendMoney(selectedTower.cost);
+
+//        Debug.Log($"Placed {selectedTower.towerName} at {position}");
+//    }
+
+//    //public void ShowPreview(Vector3 position)
+//    //{
+//    //    if (previewTower != null)
+//    //    {
+//    //        previewTower.SetActive(true);
+//    //        previewTower.transform.position = position;
+//    //    }
+//    //}
+
+//    //public void HidePreview()
+//    //{
+//    //    if (previewTower != null)
+//    //    {
+//    //        previewTower.SetActive(false);
+//    //    }
+//    //}
+
+//    public void RemoveTower(TowerSpot spot)
+//    {
+//        if (!spot.IsOccupied)
+//        {
+//            Debug.LogWarning("No tower to remove!");
+//            return;
+//        }
+
+//        GameObject tower = spot.GetPlacedTower();
+//        if (tower != null)
+//        {
+//            Destroy(tower);
+//            RefundMoney(spot.GetRefundAmount());
+//            spot.SetOccupied(false, null);
+
+//            Debug.Log("Tower removed and money refunded.");
+//        }
+//    }
+//}
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -410,6 +528,8 @@ public class TowerManager : MonoBehaviour
 
     [SerializeField] private List<TowerOption> towerOptions;
     [SerializeField] private int playerMoney = 100;
+
+    public List<TowerOption> TowerOptions => towerOptions;
 
     private TowerOption selectedTower;
 
@@ -459,10 +579,48 @@ public class TowerManager : MonoBehaviour
             return;
         }
 
-        Instantiate(selectedTower.towerPrefab, position, Quaternion.identity);
-        spot.SetOccupied(true);
+        GameObject tower = Instantiate(selectedTower.towerPrefab, position, Quaternion.identity);
+        spot.SetOccupied(true, tower); // Передаем ссылку на башню
+
         SpendMoney(selectedTower.cost);
 
-        Debug.Log($"Placed {selectedTower.towerName} at {position}");
+        Debug.Log($"Created tower: {tower?.name}");
+        Debug.Log($"Passing tower to spot: {spot.gameObject.name}");
+
+        selectedTower = null;
     }
+
+    public void RemoveTower(TowerSpot spot)
+    {
+        if (!spot.IsOccupied)
+        {
+            Debug.LogWarning("No tower to remove!");
+            return;
+        }
+
+        GameObject tower = spot.GetPlacedTower();
+        if (tower != null)
+        {
+            Debug.Log($"Destroying tower: {tower.name}");
+            Destroy(tower);
+            RefundMoney(spot.GetRefundAmount());
+            spot.SetOccupied(false, null);
+
+            Debug.Log($"Removing tower: {tower?.name} from spot: {spot.gameObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning("Tower reference is null!");
+        }
+    }
+
+
+    public void RefundMoney(int amount)
+    {
+        playerMoney += amount;
+        Debug.Log($"Player money refunded: {playerMoney}");
+    }
+
 }
+
+

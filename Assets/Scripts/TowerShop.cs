@@ -158,4 +158,39 @@ public class TowerShop : MonoBehaviour
         }
     }
 }
+//using System.Collections.Generic;
+//using UnityEngine;
+
+//public class TowerShop : MonoBehaviour
+//{
+//    [SerializeField] private GameObject towerButtonPrefab;
+//    [SerializeField] private Transform buttonContainer;
+
+//    private Dictionary<TowerManager.TowerOption, GameObject> towerButtons = new();
+
+//    public void InitializeShop(TowerManager.TowerOption[] towerOptions)
+//    {
+//        foreach (var option in towerOptions)
+//        {
+//            // Создаем кнопку
+//            GameObject buttonObj = Instantiate(towerButtonPrefab, buttonContainer);
+//            TowerShopButton button = buttonObj.GetComponent<TowerShopButton>();
+//            button.Initialize(option);
+
+//            // Сохраняем связь между кнопкой и опцией
+//            towerButtons.Add(option, buttonObj);
+//        }
+//    }
+
+//    public void RemoveTowerButton(TowerManager.TowerOption towerOption)
+//    {
+//        if (towerButtons.TryGetValue(towerOption, out GameObject buttonObj))
+//        {
+//            Destroy(buttonObj); // Удаляем кнопку из магазина
+//            towerButtons.Remove(towerOption); // Убираем из словаря
+//        }
+//    }
+//}
+
+
 
