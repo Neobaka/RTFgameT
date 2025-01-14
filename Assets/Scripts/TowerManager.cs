@@ -630,7 +630,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-
     public void RefundMoney(int amount)
     {
         playerMoney += amount;

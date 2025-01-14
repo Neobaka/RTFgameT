@@ -41,6 +41,10 @@ public class Projectile : MonoBehaviour
         }
 
         Vector3 direction = (target.position - transform.position).normalized;
+        //поворот снаряда
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
         float distanceThisFrame = speed * Time.deltaTime;
 
         transform.LookAt(target);

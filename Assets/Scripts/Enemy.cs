@@ -168,7 +168,7 @@ public class Enemy : MonoBehaviour
     {
         // Ћогика смерти врага
         Debug.Log($"¬раг {name} уничтожен");
-        GameManager.Instance.AddGold(goldReward);
+        TowerManager.Instance.RefundMoney(goldReward);
         Destroy(gameObject); // ”ничтожаем врага
 
         // ”ничтожаем все снар€ды, направленные на этого врага

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class GameManager : MonoBehaviour
     public Slider volumeSlider;
     public Toggle fullscreenToggle;
 
+    [Header("UI")]
+    public TextMeshProUGUI waveCountAtEndText;
+
+
     [SerializeField] private Text goldText;
     [SerializeField] private Text healthText;
 
@@ -23,6 +28,8 @@ public class GameManager : MonoBehaviour
     private Tower mainTower; // Ссылка на основную башню (MainTower)
 
     public int CurrentGold => currentGold;
+    //public int CurrentWaveIndex => currentWaveIndex;
+
 
     private void Awake()//реализация синглтона
     {
@@ -139,6 +146,7 @@ public class GameManager : MonoBehaviour
         if (GameOverPanel != null)
         {
             GameOverPanel.SetActive(true); // Отображаем экран "Game Over"
+            waveCountAtEndText.text = $"Количество пройденных волн {WaveManager.Instance.CurrentWaveIndex}!";
         }
     }
 }

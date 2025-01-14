@@ -28,13 +28,19 @@ public class WaveManager : MonoBehaviour
     public float timeBetweenWaves = 15f; // Время между волнами
 
 
-
     private int currentWaveIndex = 0;
     private bool isSpawning = false;
 
     [Header("UI")]
     public TextMeshProUGUI waveCountdownText;
     public TextMeshProUGUI currentWaveText;
+    public Slider waveProgressSlider;  // Для шкалы прогресса
+
+
+    public int CurrentWaveIndex => currentWaveIndex;
+
+
+
 
     private void Awake()
     {
@@ -81,66 +87,142 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(StartWaveCountdown());
     }
 
+    //IEnumerator StartWaveCountdown()
+    //{
+
+    //    while (currentWaveIndex < waves.Length)
+    //    {
+    //        Debug.Log($"Wave {currentWaveIndex + 1} starting in {timeBetweenWaves} seconds");
+    //        Debug.Log($"Не вызывается SpawnWave for wave {currentWaveIndex + 1}");
+    //        yield return new WaitForSeconds(timeBetweenWaves);
+
+    //        currentWaveText.text = $"Волна {currentWaveIndex + 1}";
+
+    //        yield return StartCoroutine(SpawnWave());
+    //        currentWaveIndex++;
+    //    }
+
+    //    Debug.Log("All waves completed!");
+    //}
     IEnumerator StartWaveCountdown()
     {
         while (currentWaveIndex < waves.Length)
         {
             Debug.Log($"Wave {currentWaveIndex + 1} starting in {timeBetweenWaves} seconds");
+            if (waves[currentWaveIndex].enemyPrefabs.Length == 0)
+            {
+                Debug.LogError($"Wave {currentWaveIndex + 1} has no enemy prefabs!");
+                yield break;
+            }
+
+            if (waveProgressSlider != null)
+            {
+                waveProgressSlider.value = 0;  // Сбрасываем значение прогресса перед стартом
+            }
+
             yield return new WaitForSeconds(timeBetweenWaves);
 
             yield return StartCoroutine(SpawnWave());
+            currentWaveText.text = $"Волна {currentWaveIndex + 1}";
+            Debug.Log($"Волна {currentWaveIndex + 1}");
             currentWaveIndex++;
         }
 
         Debug.Log("All waves completed!");
     }
 
+
+    //IEnumerator SpawnWave()
+    //{
+    //    Debug.Log("Спаун вызван");
+    //    Wave wave = waves[currentWaveIndex];
+
+    //    //for (int i = 0; i < wave.enemyCount; i++)
+    //    //{
+    //    //    SpawnEnemy(wave.enemyPrefab);
+    //    //    yield return new WaitForSeconds(wave.timeBetweenSpawns);
+    //    //}
+    //    //GameObject randomEnemyPrefab = wave.enemyPrefabs[Random.Range(0, wave.enemyPrefabs.Length)];
+
+    //    float waveStartTime = Time.time;
+
+    //    while (Time.time - waveStartTime < wave.waveTime)
+    //    {
+    //        Debug.Log("Spawning enemies...");
+    //        for (int i = 0; i < wave.enemyPrefabs.Length; i++)
+    //        {
+    //            // Количество врагов для текущего типа
+    //            int count = wave.enemyCounts[i];
+
+    //            for (int j = 0; j < count; j++)
+    //            {
+    //                if (Time.time - waveStartTime >= wave.waveTime)
+    //                {
+    //                    Debug.Log($"Время волны {Time.time}");
+    //                    //спаун босса
+    //                    if (wave.bossPrefab != null && wave.bossCount > 0)
+    //                    {
+    //                        for (int k = 0; k < wave.bossCount; k++)
+    //                        {
+    //                            SpawnEnemy(wave.bossPrefab);
+    //                            yield return new WaitForSeconds(wave.timeBetweenSpawns);
+    //                        }
+    //                    }
+    //                    break;
+    //                }
+    //                System.Random random = new();
+    //                GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
+    //                // Спаун врага
+    //                SpawnEnemy(randomEnemyPrefab);
+    //                Debug.Log($"Заспаунен {randomEnemyPrefab.name}");
+    //                yield return new WaitForSeconds(wave.timeBetweenSpawns);
+    //            }
+    //        }
+    //    }  
+    //}
     IEnumerator SpawnWave()
     {
-        Wave wave = waves[currentWaveIndex];
+        Debug.Log($"Starting spawn for wave {currentWaveIndex + 1}");
 
-        //for (int i = 0; i < wave.enemyCount; i++)
-        //{
-        //    SpawnEnemy(wave.enemyPrefab);
-        //    yield return new WaitForSeconds(wave.timeBetweenSpawns);
-        //}
-        //GameObject randomEnemyPrefab = wave.enemyPrefabs[Random.Range(0, wave.enemyPrefabs.Length)];
+        Wave wave = waves[currentWaveIndex];
+        if (wave.enemyPrefabs.Length != wave.enemyCounts.Length)
+        {
+            Debug.LogError($"Wave {currentWaveIndex + 1} has mismatched enemyCounts and enemyPrefabs lengths!");
+            yield break;
+        }
 
         float waveStartTime = Time.time;
 
         while (Time.time - waveStartTime < wave.waveTime)
         {
+            if (waveProgressSlider != null)
+            {
+                waveProgressSlider.value = (Time.time - waveStartTime) / wave.waveTime;
+            }
+
             for (int i = 0; i < wave.enemyPrefabs.Length; i++)
             {
-                // Количество врагов для текущего типа
                 int count = wave.enemyCounts[i];
-
                 for (int j = 0; j < count; j++)
                 {
                     if (Time.time - waveStartTime >= wave.waveTime)
                     {
-                        Debug.Log($"Время волны {Time.time}");
-                        //спаун босса
-                        if (wave.bossPrefab != null && wave.bossCount > 0)
-                        {
-                            for (int k = 0; k < wave.bossCount; k++)
-                            {
-                                SpawnEnemy(wave.bossPrefab);
-                                yield return new WaitForSeconds(wave.timeBetweenSpawns);
-                            }
-                        }
+                        Debug.Log($"Wave time exceeded for wave {currentWaveIndex + 1}");
                         break;
                     }
-                    System.Random random = new();
-                    GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
-                    // Спаун врага
+
+                    GameObject randomEnemyPrefab = wave.enemyPrefabs[i];
                     SpawnEnemy(randomEnemyPrefab);
-                    Debug.Log($"Заспаунен {randomEnemyPrefab.name}");
+                    Debug.Log($"Spawned enemy {randomEnemyPrefab.name}");
+
                     yield return new WaitForSeconds(wave.timeBetweenSpawns);
                 }
             }
-        }  
+        }
+
+        Debug.Log($"Wave {currentWaveIndex + 1} completed spawning");
     }
+
 
     void SpawnEnemy(GameObject enemyPrefab)
     {
