@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,13 +21,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int goldReward = 50;
 
     private float speed;
-    private float hp;
+    public float hp;
     private float damage;
     private Transform[] waypoints;
     private int waypointIndex = 0;
 
     private Transform targetMainTower; // Цель - MainTower
     private bool isAttackingMainTower = false; // Проверка, чтобы не запускать корутину несколько раз
+
+    private List<GameObject> activeProjectiles = new List<GameObject>();
+
+    public delegate void OnDeathDelegate(GameObject enemy, GameObject projectile);
+    public event OnDeathDelegate OnDeath;
 
     public void Initialize(Transform[] points)
     {
@@ -91,7 +97,7 @@ public class Enemy : MonoBehaviour
 
         if (waypoints == null || waypoints.Length == 0)
         {
-            Debug.LogError("Waypoints are null or empty!");
+            //Debug.LogError("Waypoints are null or empty!");
             return;
         }
 
@@ -160,8 +166,26 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        // Логика смерти врага
+        Debug.Log($"Враг {name} уничтожен");
         GameManager.Instance.AddGold(goldReward);
-        Destroy(gameObject);
+        Destroy(gameObject); // Уничтожаем врага
+
+        // Уничтожаем все снаряды, направленные на этого врага
+        foreach (GameObject projectile in activeProjectiles)
+        {
+            Destroy(projectile);  // Удаляем снаряд
+        }
+    }
+
+    public void AddProjectile(GameObject projectile)
+    {
+        activeProjectiles.Add(projectile);  // Добавляем снаряд в список
+    }
+
+    public void RemoveProjectile(GameObject projectile)
+    {
+        activeProjectiles.Remove(projectile);  // Удаляем снаряд из списка
     }
 
     private void ReachEnd()

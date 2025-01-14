@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public Slider volumeSlider;
     public Toggle fullscreenToggle;
 
-    [SerializeField] private int startingGold = 100;
     [SerializeField] private Text goldText;
     [SerializeField] private Text healthText;
 
@@ -35,6 +34,47 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ReturnToMainMenu()//выход в главное меню
+    {
+        SceneManager.LoadScene("StartMenuScene");
+    }
+
+    public void Play()//кнопка игры
+    {
+        Debug.Log("Play button clicked!");
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        //GameOverPanel.SetActive(false);
+        //if (educationBeen)
+        //    SceneManager.LoadScene("1");
+        //else
+        //    SceneManager.LoadScene("EducationScene");
+        SceneManager.LoadScene("GameScene");
+        //currentGold = startingGold;
+    }
+
+    public void PlayEducation()//кнопка игры
+    {
+        Debug.Log("PlayEducation button clicked!");
+        mainMenuPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        //GameOverPanel.SetActive(false);
+        SceneManager.LoadScene("EducationScene");
+        //currentGold = startingGold;
+
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0f; // Останавливает время
+        GameOverPanel.SetActive(true); // Показывает панель завершения игры
     }
 
     public void SetGameSceneObjects(Text gold, Text health, Tower mainTower) //инициализация локальных объектов

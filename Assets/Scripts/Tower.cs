@@ -33,8 +33,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject rangeIndicator;
-    [SerializeField] private Transform firePoint; // Точка, откуда вылетают снаряды
-    [SerializeField] private RectTransform hpBar; // Ссылка на RectTransform HP бара (UI объект)
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private RectTransform hpBar;
 
     public float Damage => damage;
     public float Range => range;
@@ -44,84 +44,37 @@ public class Tower : MonoBehaviour
     private float fireCountdown = 0f;
     private Transform target;
 
-    // Для MainTower
     public float maxHealth = 100f;
-    private float health = 100f; // Здоровье только для MainTower
-    public bool isMainTower = false; // Для MainTower
+    private float health = 100f;
+    public bool isMainTower = false;
 
-    public void Upgrade()
-    {
-        if (currentLevel >= upgrades.Length + 1)
-            return;
-
-        UpgradeStats upgrade = upgrades[currentLevel - 1];
-        if (GameManager.Instance.SpendGold(upgrade.cost))
-        {
-            damage += upgrade.damageIncrease;
-            range += upgrade.rangeIncrease;
-            fireRate += upgrade.fireRateIncrease;
-            currentLevel++;
-            UpdateRangeIndicator();
-        }
-    }
-
-    private void UpdateRangeIndicator()
-    {
-        if (rangeIndicator != null)
-        {
-            rangeIndicator.transform.localScale = Vector3.one * (range * 2);
-        }
-    }
+    private GameObject initialProjectilePrefab;
 
     private void Start()
     {
-        // Инициализация свойств для каждой башни
-        switch (type)
+        initialProjectilePrefab = projectilePrefab;
+        // Инициализация свойств башни
+        if (type == TowerType.MainTower)
         {
-            case TowerType.MainTower:
-                isMainTower = true;
-                health = maxHealth; // Начальное здоровье для MainTower
-                break;
-            case TowerType.SniperTower:
-                damage *= 2f;
-                range *= 1.5f;
-                fireRate *= 0.5f;
-                break;
-            case TowerType.CatapultTower:
-                damage *= 1.5f; // Усиленный урон для катапульты
-                range *= 1.2f;
-                break;
-            case TowerType.ElectricTower:
-                damage *= 1.2f;
-                range *= 1.3f;
-                fireRate *= 0.8f;
-                break;
-            case TowerType.MagicTower:
-                damage *= 1.1f;
-                range *= 1.2f;
-                fireRate *= 1.1f;
-                break;
-            case TowerType.FireTower:
-                damage *= 1.5f;
-                range *= 1.1f;
-                fireRate *= 0.9f;
-                break;
-            case TowerType.IceTower:
-                damage *= 1.2f;
-                range *= 1.2f;
-                fireRate *= 0.9f;
-                break;
+            isMainTower = true;
+            health = maxHealth;
         }
-
         UpdateRangeIndicator();
     }
 
     private void Update()
     {
+        if (projectilePrefab == null && initialProjectilePrefab != null)
+        {
+            Debug.Log($"{gameObject.name}: Восстанавливаю значение projectilePrefab.");
+            projectilePrefab = initialProjectilePrefab;
+        }
+
         if (isMainTower && health <= 0f)
         {
-            Destroy(gameObject); // Уничтожаем MainTower, если здоровье <= 0
+            Destroy(gameObject);
             GameManager.Instance.GameOver();
+            return;
         }
 
         if (target == null)
@@ -146,103 +99,103 @@ public class Tower : MonoBehaviour
     }
 
     private void FindTarget()
+{
+    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    //Debug.Log($"Найдено врагов: {enemies.Length}");
+
+    float shortestDistance = Mathf.Infinity;
+    GameObject nearestEnemy = null;
+
+    foreach (GameObject enemy in enemies)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+        //Debug.Log($"Расстояние до {enemy.name}: {distanceToEnemy}");
 
-        foreach (GameObject enemy in enemies)
+        if (distanceToEnemy < shortestDistance)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
-            }
-        }
-
-        if (nearestEnemy != null && shortestDistance <= range)
-        {
-            target = nearestEnemy.transform;
+            shortestDistance = distanceToEnemy;
+            nearestEnemy = enemy;
         }
     }
 
+    if (nearestEnemy != null && shortestDistance <= range)
+    {
+        target = nearestEnemy.transform;
+        Debug.Log($"Цель установлена: {target.name}");
+    }
+    else
+    {
+        target = null;
+        //Debug.Log("Цель не найдена.");
+    }
+}
+
+
     private bool IsTargetInRange()
     {
-        return Vector3.Distance(transform.position, target.position) <= range;
+        //if (target != null && Vector3.Distance(transform.position, target.position) <= range)
+        //{
+        //    Debug.Log($"{gameObject.name}: Цель в зоне поражения.");
+        //    return true;
+        //}
+        //else
+        //{
+        //    Debug.Log($"{gameObject.name}: Цель вне досягаемости или не задана.");
+        //    return false ;
+        //}
+        //return false;
+        return target != null && Vector3.Distance(transform.position, target.position) <= range;
     }
 
     private void Shoot()
     {
+        Debug.Log($"{gameObject.name}: Метод Shoot() вызван.");
+
+        if (projectilePrefab == null || target == null)
+        {
+            Debug.LogError($"{gameObject.name}: Prefab снаряда не задан!");
+            return;
+        }
+
         GameObject projectileGO = Instantiate(projectilePrefab,
             firePoint != null ? firePoint.position : transform.position,
             Quaternion.identity);
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
+        Debug.Log($"Снаряд {projectileGO.name} создан в позиции {firePoint.position}");
 
+
+        Projectile projectile = projectileGO.GetComponent<Projectile>();
         if (projectile != null)
         {
-            // Инициализация снаряда в зависимости от типа башни
-            switch (type)
-            {
-                case TowerType.MainTower:
-                case TowerType.SniperTower:
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.CatapultTower:
-                    // Логика для катапульты (например, снаряды с эффектом области)
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.ElectricTower:
-                    // Логика для электрических снарядов с отскоком
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.MagicTower:
-                    // Логика для магической ауры
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.FireTower:
-                    // Логика для огненных снарядов
-                    projectile.Initialize(target, damage);
-                    break;
-                case TowerType.IceTower:
-                    // Логика для ледяных снарядов
-                    projectile.Initialize(target, damage);
-                    break;
-            }
+            Debug.Log("Проджектайл создан");
+            projectile.Initialize(target, damage);
+            Debug.Log($"{gameObject.name} стреляет в {target.name}");
         }
+        else Debug.LogError("На снаряде отсутствует компонент Projectile!");
     }
 
-    // Для MainTower добавляем метод получения урона
     public void TakeDamage(float damageAmount)
     {
         if (isMainTower)
         {
             health -= damageAmount;
             UpdateHpBar();
-            GameManager.Instance.ReduceHealth();
         }
     }
 
-    // Обновление ширины HP бара
+    private void UpdateRangeIndicator()
+    {
+        if (rangeIndicator != null)
+        {
+            rangeIndicator.transform.localScale = Vector3.one * (range * 2);
+        }
+    }
+
     public void UpdateHpBar()
     {
         if (hpBar != null)
         {
             float healthPercentage = health / maxHealth;
-            hpBar.localScale = new Vector3(healthPercentage, 1f, 1f); // Изменение ширины
-        }
-    }
-
-    // Для других башен добавляем методы для применения эффектов
-    public void ApplyAreaEffect(Vector3 position, float radius, float damageAmount)
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(position, radius);
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.CompareTag("Enemy"))
-            {
-                hitCollider.GetComponent<Enemy>().TakeDamage(damageAmount);
-            }
+            hpBar.localScale = new Vector3(healthPercentage, 1f, 1f);
         }
     }
 

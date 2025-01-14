@@ -45,7 +45,7 @@ public class TowerSpot : MonoBehaviour
     public GameObject GetPlacedTower()
     {
         return placedTower;
-        Debug.Log($"Returning placed tower: {placedTower?.name}");
+        //Debug.Log($"Returning placed tower: {placedTower?.name}");
 
     }
 

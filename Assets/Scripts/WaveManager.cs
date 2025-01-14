@@ -135,6 +135,7 @@ public class WaveManager : MonoBehaviour
                     GameObject randomEnemyPrefab = wave.enemyPrefabs[random.Next(wave.enemyPrefabs.Length)];
                     // Спаун врага
                     SpawnEnemy(randomEnemyPrefab);
+                    Debug.Log($"Заспаунен {randomEnemyPrefab.name}");
                     yield return new WaitForSeconds(wave.timeBetweenSpawns);
                 }
             }

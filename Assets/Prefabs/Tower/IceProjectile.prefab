@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7891212550387968700}
   - component: {fileID: 8117871942794613555}
+  - component: {fileID: 4747381687233045119}
   m_Layer: 0
   m_Name: IceProjectile
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 8280504591835200615}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 12.3, z: -0.3237741}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.5405, y: 12.0405, z: -0.3237741}
+  m_LocalScale: {x: 2.153374, y: 2.153374, z: 2.153374}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,11 +74,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1676877979
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.63207537, g: 0.98924834, b: 1, a: 1}
+  m_Sprite: {fileID: -2605532414636746613, guid: 619ed3de14833bd409c6df16b470b9e0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,3 +88,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4747381687233045119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280504591835200615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d6bf8b776f7a340ae644b0cc5acbb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 70
+  explosionRadius: 0
+  impactEffect: {fileID: 0}
