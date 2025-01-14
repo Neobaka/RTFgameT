@@ -1740,6 +1740,51 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 557505716}
   m_SourcePrefab: {fileID: 100100000, guid: c099dd9f0d0332446968ae7a9515ee84, type: 3}
+--- !u!1 &309559040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309559042}
+  - component: {fileID: 309559041}
+  m_Layer: 0
+  m_Name: GameSpeedController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &309559041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309559040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef0e4279bc735049a823b57ceb3c37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedUpButton: {fileID: 0}
+--- !u!4 &309559042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309559040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 53.15857, y: 29.593117, z: 8.354149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &313597003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2777,7 +2822,7 @@ RectTransform:
   m_Father: {fileID: 1922569133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8369,7 +8414,7 @@ RectTransform:
   m_Father: {fileID: 338251781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8692,6 +8737,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223520522}
+  m_CullTransparentMesh: 1
+--- !u!1 &1275684944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1275684945}
+  - component: {fileID: 1275684949}
+  - component: {fileID: 1275684948}
+  - component: {fileID: 1275684947}
+  - component: {fileID: 1275684946}
+  m_Layer: 0
+  m_Name: X2Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1275684945
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275684944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1889019853}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 38.93, y: 28.27}
+  m_SizeDelta: {x: 4.564, y: 4.564}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1275684946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275684944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef0e4279bc735049a823b57ceb3c37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedUpButton: {fileID: 1275684947}
+--- !u!114 &1275684947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275684944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.54088044, g: 0.54088044, b: 0.54088044, a: 1}
+    m_SelectedColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1275684948}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1275684948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275684944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 756639507402487250, guid: d71bd48ef96a12545bd4aebc957d4d97, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1275684949
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275684944}
   m_CullTransparentMesh: 1
 --- !u!1 &1275764239
 GameObject:
@@ -9143,7 +9322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1317927512
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9817,31 +9996,206 @@ MonoBehaviour:
   waves:
   - enemyPrefabs:
     - {fileID: 1605867826}
-    - {fileID: 937210757}
-    enemyCounts: 0200000002000000
+    enemyCounts: 02000000
     bossPrefab: {fileID: 1726980566}
     bossCount: 0
     timeBetweenSpawns: 3
+    waveTime: 30
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    enemyCounts: 0300000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 3
+    waveTime: 30
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    enemyCounts: 0300000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 2
+    waveTime: 30
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    enemyCounts: 0300000004000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 2
     waveTime: 10
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    enemyCounts: 0300000004000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 2
+    waveTime: 20
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 508242365}
+    - {fileID: 937210757}
+    enemyCounts: 030000000300000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 2
+    waveTime: 45
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    enemyCounts: 040000000400000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 2
+    waveTime: 45
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    enemyCounts: 03000000040000000300000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1.5
+    waveTime: 45
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 508242365}
+    - {fileID: 937210757}
+    - {fileID: 1036351775}
+    enemyCounts: 04000000040000000300000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1.5
+    waveTime: 45
   - enemyPrefabs:
     - {fileID: 1605867826}
     - {fileID: 508242365}
     - {fileID: 1036351775}
-    enemyCounts: 020000000200000002000000
+    - {fileID: 1036351775}
+    enemyCounts: 04000000040000000300000003000000
     bossPrefab: {fileID: 1726980566}
     bossCount: 0
     timeBetweenSpawns: 3
-    waveTime: 10
+    waveTime: 45
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    enemyCounts: 0200000003000000030000000300000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1.5
+    waveTime: 60
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 508242365}
+    - {fileID: 937210757}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    enemyCounts: 03000000030000000400000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 60
   - enemyPrefabs:
     - {fileID: 1605867826}
     - {fileID: 508242365}
     - {fileID: 925847554}
     - {fileID: 1036351775}
-    enemyCounts: 02000000020000000200000002000000
+    - {fileID: 937210757}
+    enemyCounts: 0200000003000000040000000300000003000000
     bossPrefab: {fileID: 1726980566}
     bossCount: 0
-    timeBetweenSpawns: 3
-    waveTime: 10
+    timeBetweenSpawns: 1.5
+    waveTime: 60
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    enemyCounts: 0300000003000000040000000400000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 60
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    enemyCounts: 0300000003000000040000000400000004000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 60
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    - {fileID: 1855191343}
+    enemyCounts: 020000000300000004000000040000000400000002000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 75
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    - {fileID: 1855191343}
+    enemyCounts: 010000000300000004000000040000000400000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 75
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    - {fileID: 1855191343}
+    enemyCounts: 020000000300000004000000040000000400000003000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 75
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    - {fileID: 1855191343}
+    enemyCounts: 020000000300000004000000040000000400000004000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 0
+    timeBetweenSpawns: 1
+    waveTime: 75
+  - enemyPrefabs:
+    - {fileID: 1605867826}
+    - {fileID: 937210757}
+    - {fileID: 508242365}
+    - {fileID: 1036351775}
+    - {fileID: 925847554}
+    - {fileID: 1855191343}
+    enemyCounts: 020000000200000004000000040000000400000004000000
+    bossPrefab: {fileID: 1726980566}
+    bossCount: 1
+    timeBetweenSpawns: 1
+    waveTime: 75
   timeBetweenWaves: 5
   waveCountdownText: {fileID: 718434327}
   currentWaveText: {fileID: 718434327}
@@ -11140,13 +11494,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2113351006}
+      - m_Target: {fileID: 2113351005}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartScene
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12141,6 +12495,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8316297900139730105, guid: 64ee194e9de56794094bacdec2f3e6b2, type: 3}
   m_PrefabInstance: {fileID: 1762147285557710319}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1855191343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8306208389944616227, guid: e07ef5f7fcd167a4a981133a14d2db87, type: 3}
+  m_PrefabInstance: {fileID: 1321662747083648710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1867523934
 GameObject:
   m_ObjectHideFlags: 0
@@ -12460,6 +12819,7 @@ Transform:
   - {fileID: 1433927402}
   - {fileID: 2041857492}
   - {fileID: 1573361861}
+  - {fileID: 1275684945}
   m_Father: {fileID: 799581919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920895169
@@ -15257,6 +15617,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 2113351007}
+  - {fileID: 309559042}
   - {fileID: 1398581113}
   - {fileID: 2015800287}
   - {fileID: 848085332}

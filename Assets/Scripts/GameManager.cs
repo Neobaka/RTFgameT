@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void Play()//кнопка игры
     {
+        Time.timeScale = 1f;
         Debug.Log("Play button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayEducation()//кнопка игры
     {
+        Time.timeScale = 1f;
         Debug.Log("PlayEducation button clicked!");
         mainMenuPanel.SetActive(false);
         settingsPanel.SetActive(false);
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -130,6 +133,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f; // Останавливает время
         Debug.Log("Game paused.");
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1f; // Останавливает время
+        Debug.Log("Game unpaused.");
     }
 
     public void ResumeGame()

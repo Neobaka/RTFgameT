@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using static WaveManager;
 
 public class WaveManager : MonoBehaviour
 {
@@ -195,10 +196,10 @@ public class WaveManager : MonoBehaviour
 
         while (Time.time - waveStartTime < wave.waveTime)
         {
-            if (waveProgressSlider != null)
-            {
-                waveProgressSlider.value = (Time.time - waveStartTime) / wave.waveTime;
-            }
+            //if (waveProgressSlider != null)
+            //{
+            //    UpdateProgressBar(Time.time, ti)
+            //}
 
             for (int i = 0; i < wave.enemyPrefabs.Length; i++)
             {
@@ -218,11 +219,56 @@ public class WaveManager : MonoBehaviour
                     yield return new WaitForSeconds(wave.timeBetweenSpawns);
                 }
             }
+            break;
         }
 
         Debug.Log($"Wave {currentWaveIndex + 1} completed spawning");
     }
+    //public void UpdateProgressBar(Time.time, Time.startTime, Wave wave.wavetime) 
+    //{
+    //    ProgressValue = (Time.time - waveStartTime) / wave.waveTime;
+    //    waveProgressSlider.localScale = new Vector3(ProgressValue, 1f, 1f);
+    //}
+    IEnumerator SpawnEndlessWaves()
+    {
+        Debug.Log($"Starting spawn for wave {currentWaveIndex + 1}");
+        while (true)
+        {
+            // Рандомизируем набор врагов для бесконечной волны
+            Wave wave = GenerateRandomWave();
 
+            // Начинаем спавнить врагов в бесконечной волне
+            Debug.Log("Starting endless wave...");
+            yield return StartCoroutine(SpawnWave());
+
+            // Пауза между волнами
+            yield return new WaitForSeconds(timeBetweenWaves);
+        }
+    }
+
+    Wave GenerateRandomWave()
+    {
+        Wave randomWave = new Wave();
+
+        int enemyCount = Random.Range(3, 5);  // Количество типов врагов
+        randomWave.enemyPrefabs = new GameObject[enemyCount];
+        randomWave.enemyCounts = new int[enemyCount];
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            randomWave.enemyPrefabs[i] = waves[Random.Range(0, waves.Length)].enemyPrefabs[Random.Range(0, waves[0].enemyPrefabs.Length)];
+            randomWave.enemyCounts[i] = Random.Range(5, 20);  // Количество врагов
+        }
+
+        // Рандомный босс
+        randomWave.bossPrefab = waves[Random.Range(0, waves.Length)].bossPrefab;
+        randomWave.bossCount = Random.Range(0, 3);  // Иногда появляется босс
+
+        randomWave.timeBetweenSpawns = 2f;
+        randomWave.waveTime = 30f + Random.Range(0, 30);  // Время волны с рандомизацией
+
+        return randomWave;
+    }
 
     void SpawnEnemy(GameObject enemyPrefab)
     {
